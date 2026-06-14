@@ -1,30 +1,189 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro'
+const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
+const pageTitle = "";
+// import * from THREE as 'three';
+// import DotField from '../components/DotField';
 
 ---
 
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        <title>Astro</title>
-    </head>
-    <body>
-        <a href="/">Home</a>
-        <a href="/about/">About</a>
-        <a href="/blog/">Blog</a>
-        <h1>My blog site is very very fast</h1>
-         <p>This is where I will post about my journey learning Astro.</p>
-    <ul>
-      <li><a href="/posts/post-1/">Post 1</a></li>
-            <li><a href="/posts/post-2/">Post 2</a></li>
+<BaseLayout pageTitle={pageTitle}>
+  <div class="al-folio-container">
+    <!-- <header class="page-header"> -->
+      <h1 class="page-title">{"Blog"}</h1>
+      <!-- <p class="page-description">This is where I will post about my journey learning Astro.</p> -->
+    <!-- </header> -->
 
-    </ul>
-        <p>
-            This site will update as I complete more of the tutorial, so keep
-            checking back and see how my journey is going!
-        </p>
-    </body>
-</html>
+    <div class="card-grid">
+      {allPosts.map((post: any) => (
+        <article class="card">
+          <a href={post.url} class="card-link-wrapper">
+            <div class="card-img-container">
+              <img 
+                src={post.frontmatter.image || 'https://via.placeholder.com/800x500?text=Blog+Post'} 
+                alt={post.frontmatter.title} 
+                class="card-img-top"
+              />
+            </div>
+            
+            <div class="card-body">
+              <h2 class="card-title">{post.frontmatter.title}</h2>
+              
+              {/* Al-folio heavily features dates in small muted text */}
+              {post.frontmatter.date && (
+                <p class="card-text text-muted">
+                  <small>{new Date(post.frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</small>
+                </p>
+              )}
+              
+              {post.frontmatter.description && (
+                <p class="card-text">{post.frontmatter.description}</p>
+              )}
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Base Al-Folio Typography & Spacing */
+  .al-folio-container {
+    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
+    color: #212529; /* Bootstrap standard text color */
+    max-width: 1000px; /* Al-folio usually has a constrained max-width */
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+
+  .page-header {
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 1rem;
+  }
+
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .page-description {
+    font-size: 1.15rem;
+    color: #f1f8ff;
+    margin: 0;
+  }
+
+  /* Grid Layout */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  /* Al-Folio / Bootstrap Card Styling */
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #020202;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem; /* Classic subtle al-folio corners */
+    transition: box-shadow 0.3s ease;
+  }
+
+  /* Subtle academic hover effect */
+  .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Clickable wrapper */
+  .card-link-wrapper {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* Card Image */
+  .card-img-container {
+    width: 100%;
+    height: 180px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  }
+
+  .card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Rounds only the top corners to match the card border */
+    border-top-left-radius: calc(0.25rem - 1px);
+    border-top-right-radius: calc(0.25rem - 1px);
+  }
+
+  /* Card Content */
+  .card-body {
+    flex: 1 1 auto;
+    padding: 1.25rem;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #78b4ef;
+  }
+
+  .card-link-wrapper:hover .card-title {
+    color: #549763; /* Optional: Al-folio sometimes turns titles blue on hover */
+  }
+
+  .card-text {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #ffffff;
+  }
+
+  .card-text:last-child {
+    margin-bottom: 0;
+  }
+
+  .text-muted {
+    color: #8fb1cf;
+  }
+  
+  .text-muted small {
+    font-size: 80%;
+    font-weight: 400;
+  }
+
+  /* Card Image Container */
+  .card-img-container {
+    width: 100%;
+    height: 180px;
+    border-bottom: 1px solid rgba(250, 243, 243, 0.125);
+    overflow: hidden; /* <-- This strictly clips any overflowing image parts */
+    position: relative; 
+    
+    /* Move the border-radius here instead of the image */
+    border-top-left-radius: calc(0.25rem - 1px);
+    border-top-right-radius: calc(0.25rem - 1px);
+  }
+
+  /* Card Image */
+  .card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Forces image to fill the box without stretching */
+    display: block; /* Removes the tiny default gap below inline images */
+  }
+</style>

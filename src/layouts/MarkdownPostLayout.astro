@@ -1,0 +1,30 @@
+---
+import BaseLayout from './BaseLayout.astro';
+const { frontmatter } = Astro.props;
+import "../styles/markdown.css"
+---
+
+<BaseLayout pageTitle={frontmatter.title}>
+
+  <!-- Full-width banner -->
+  <div class="blog-banner">
+    <img src={frontmatter.image} alt={frontmatter.imageAlt ?? frontmatter.title} />
+  </div>
+
+  <!-- Meta block -->
+  <div class="blog-meta">
+   
+    <div class="byline">
+      <span>{frontmatter.author}</span>
+      <span>·</span>
+      <span>{frontmatter.pubDate.toString().slice(0, 10)}</span>
+    </div>
+    {frontmatter.description && (
+      <p class="description">{frontmatter.description}</p>
+    )}
+      <slot />
+  </div>
+
+
+
+</BaseLayout>

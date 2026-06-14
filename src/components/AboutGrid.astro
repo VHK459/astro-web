@@ -1,0 +1,284 @@
+---
+---
+
+<style>
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: 1.25rem;
+    padding: 2rem 1.5rem 4rem;
+    color: #0e0101;
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: rgba(39, 42, 41, 0.704);
+    border-radius: 15px;
+  }
+
+  /* ── Hero row: photo + intro ── */
+  .hero {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .image {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid rgba(54, 110, 100, 0.5);
+  }
+
+  .intro-text h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 0.4rem;
+  }
+
+  .intro-text .tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent, #46A695);
+    border: 1px solid var(--color-accent, #46A695);
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-bottom: 0.75rem;
+  }
+
+  .intro-text p {
+    font-size: 1.23rem;
+    /* line-height: 2rem; */
+    color: var(--color-text-muted, #ffffff);
+    margin: 0;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    margin: 2rem 0;
+  }
+
+  /* ── Section blocks ── */
+  .section {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent, #46A695);
+    margin: 0 0 0.75rem;
+  }
+
+  .section h2 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 0.6rem;
+  }
+
+  .section p {
+    /* font-size: 0.95rem; */
+    /* line-height: 1.75; */
+    color: var(--color-text-muted, #636370);
+    margin: 0 0 0.9rem;
+  }
+
+  /* ── Interests pill row ── */
+  .pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .pill {
+    font-size: 0.78rem;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(70, 166, 149, 0.1);
+    border: 1px solid rgba(70, 166, 149, 0.3);
+    color: var(--color-accent, #46A695);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Publication card ── */
+  .pub-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    margin-top: 0.75rem;
+  }
+
+  .pub-card .pub-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0 0 0.3rem;
+  }
+
+  .pub-card .pub-venue {
+    font-size: 1rem;
+    color: var(--color-text-muted, #636370);
+    margin: 0;
+  }
+
+  /* ── Currently banner ── */
+  .now-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(70, 166, 149, 0.07);
+    border: 1px solid rgba(70, 166, 149, 0.2);
+    border-radius: 10px;
+    padding: 0.9rem 1.2rem;
+    margin-top: 0.75rem;
+  }
+
+  .now-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-accent, #46A695);
+    flex-shrink: 0;
+    box-shadow: 0 0 6px var(--color-accent, #46A695);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.3; }
+  }
+
+  .now-banner p {
+    font-size: 0.9rem;
+    color: #c0c0c0;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 600px) {
+    .container {
+      padding: 1.25rem 1rem 3rem;
+    }
+
+    /* Stack photo above text on mobile */
+    .hero {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1.25rem;
+    }
+
+    .image {
+      width: 110px;
+      height: 110px;
+    }
+
+    .intro-text h1 {
+      font-size: 1.35rem;
+    }
+
+    .pills {
+      justify-content: center;
+    }
+  }
+</style>
+
+<div class="container">
+
+  <!-- Hero: photo + intro -->
+  <div class="hero">
+    <img class="image" src="/src/image/img-selff.jpg" alt="Vishnu Kadam" />
+    <div class="intro-text">
+      <h1>Vishnu Kadam</h1>
+      <span class="tag">BS-MS · IISER Pune</span>
+      <p>
+        I'm a BS-MS graduate from the Indian Institute of Science Education and
+        Research, Pune. My interests lie in all things deep learning — from
+        theory to the latest applications. Recently I've been drawn to
+        Mechanistic Interpretability and am working my way through it seriously.
+      </p>
+    </div>
+  </div>
+
+  <!-- <hr class="divider" /> -->
+
+  <!-- Current focus -->
+  <div class="section">
+    <p class="section-label">Now</p>
+    <div class="now-banner">
+      <div class="now-dot"></div>
+      <p>
+        Investigating mechanistic interpretability techniques on AI weather
+        models — trying to uncover what these models actually learn internally.
+      </p>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Interests -->
+  <div class="section">
+    <p class="section-label">Interests</p>
+    <div class="pills">
+      <span class="pill">Mechanistic Interpretability</span>
+      <span class="pill">Deep Learning Theory</span>
+      <span class="pill">Weather Prediction</span>
+      <span class="pill">Diffusion Models</span>
+      <span class="pill">Protein Interaction</span>
+      <span class="pill">Model Architecture</span>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Research -->
+  <div class="section">
+    <p class="section-label">Research</p>
+    <h2>Protein–Protein Interaction</h2>
+    <p>
+      My first research project was deep learning for protein–protein interaction
+      under Dr. Arnab Goswami. I handled everything end-to-end — dataset
+      creation, model architecture decisions, training, and benchmarking. It was
+      my first real exposure to what research actually demands, and it led to my
+      first publication.
+    </p>
+    <div class="pub-card">
+      <p class="pub-title">Your paper title here</p>
+      <p class="pub-venue">Venue · Year · <a href="#" style="color: var(--color-accent); text-decoration:none;">PDF ↗</a></p>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <!-- Projects -->
+  <div class="section">
+    <p class="section-label">Projects</p>
+    <h2>Diffusion Models</h2>
+    <p>
+      An in-depth dive into score-based diffusion — I implemented annealed
+      Langevin dynamics from scratch and built extensive visualisations to
+      develop an intuition for the process.
+    </p>
+
+    <h2>Weather Prediction · Master's Thesis</h2>
+    <p>
+      Started as a curriculum project and grew into my thesis. I trained and
+      fine-tuned an SFNO-based weather prediction model, then benchmarked its
+      regional forecasting capabilities after fine-tuning. Currently extending
+      this with mechanistic interpretability to understand what the model has
+      actually learned.
+    </p>
+  </div>
+
+</div>

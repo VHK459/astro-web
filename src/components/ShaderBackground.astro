@@ -1,0 +1,96 @@
+---
+---
+<canvas id="shader-bg"></canvas>
+
+<style>
+  #shader-bg {
+    position: inherit;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+   filter: brightness(1.2) contrast(5) blur(1px);
+    /* filter:brightness(1.2) contrast(3) drop-shadow(0px 0px 4px rgba(0, 255, 255, 0.6)) blur(1px); */
+  
+     
+  }
+</style>
+
+<script>
+  const canvas = document.getElementById('shader-bg') as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d')!;
+
+  // Character ramp — dense → sparse, maps brightness 0→1
+  const RAMP = '@#W$9876543210?!abc;:+=-,._  ';
+
+  // How many px each cell occupies (visual size)
+  const CELL = 14;
+  // Font slightly smaller than cell so chars don't touch
+  const FONT_SIZE = 12;
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  let t = 0;
+
+  // Layered sine noise — smooth, organic, no library needed
+  function field(x: number, y: number, t: number): number {
+    const v =
+      Math.sin(x * 0.15 + t * 0.70) * Math.cos(y * 0.13 + t * 0.50) * 0.40 +
+      Math.sin(x * 0.06 - y * 0.10 + t * 1.20) * 0.35 +
+      Math.cos(x * 0.04 + y * 0.08 - t * 0.40) * 0.25;
+    return v * 0.5 + 0.5; // remap to 0–1
+  }
+
+  // Map a 0-1 brightness to an RGB colour (dark purple → bright cyan/white)
+  function palette(n: number): string {
+    // Three colour stops: dark (0) → mid purple (0.45) → bright cyan-white (1)
+    if (n < 0.45) {
+      const s = n / 0.45;
+      const r = Math.round(20  + s * 80);
+      const g = Math.round(0   + s * 20);
+      const b = Math.round(40  + s * 140);
+      return `rgb(${r},${g},${b})`;
+    } else {
+      const s = (n - 0.45) / 0.55;
+      const r = Math.round(100 + s * 155);
+      const g = Math.round(20  + s * 235);
+      const b = Math.round(180 + s * 75);
+      return `rgb(${r},${g},${b})`;
+    }
+  }
+
+  function frame() {
+    t += 0.013;
+    // ctx.filter = "blur(1px)";
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.font = `${FONT_SIZE}px "Courier New", monospace`;
+    ctx.textBaseline = 'top';
+
+    const cols = Math.ceil(canvas.width  / CELL);
+    const rows = Math.ceil(canvas.height / CELL);
+
+    for (let row = 0; row < rows; row++) {
+      for (let col = 0; col < cols; col++) {
+        const n = field(col, row, t);
+
+        // Skip near-black cells — punches holes that feel intentional
+        if (n < 0.18) continue;
+
+        const charIdx = Math.floor(n * (RAMP.length - 1));
+        ctx.fillStyle = palette(n);
+        ctx.fillText(RAMP[charIdx], col * CELL, row * CELL);
+      }
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  frame();
+</script>

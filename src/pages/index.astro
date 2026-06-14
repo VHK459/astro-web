@@ -1,20 +1,73 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+const pageTitle = "Kadmium ";
+import ShaderBackground from '../components/ShaderBackground.astro';
+import DotField from '../components/DotField.astro';
 ---
+<style>
+  :global(body) {
+    margin: 0;
+    
+  }
+  .site-homepage{
+    /* position: fixed; */
+    /* inset: 12px; */
+    height: 90vh;
+    margin: 3%;
+    border:  2px solid rgba(255, 255, 255, 0.841);
+        border-radius: 35px;
+    overflow: hidden; 
+    z-index: 0;
+  }
+  footer {
+    display: flex;
+    position:absolute;
+    bottom: 0;
+    width: 100%;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: center;
+    background: transparent;
+  }
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<a href="/">Home</a>
-		<a href="/about/">About</a>
-		<a href="/blog/">Blog</a>
-		<h1>My astro site is very very fast</h1>
-	</body>
-</html>
+  .img-self{
+    border-radius: 50%;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    max-width: 40%;
+    max-height: 40%;
+    height: auto;
+    width: auto;
+
+  }
+
+  .img-wrapper{
+    position:absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    height: auto;
+    width: auto;
+    font-size:1.5rem;
+    font-weight: 800;
+    color: rgb(225, 124, 243);
+  }
+</style>
+
+
+
+<BaseLayout pageTitle = {""}>
+  <div class="site-homepage">
+    
+    <div >
+    <img class="img-self" src="src/image/image-selff-optm.gif" alt="">
+    <p class="img-wrapper">Vishnu Kadam</p>
+    </div>
+    <ShaderBackground />
+  </div>
+</BaseLayout> 
