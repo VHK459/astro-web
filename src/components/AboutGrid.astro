@@ -1,4 +1,5 @@
 ---
+import AboutImage from '../image/img-selff.jpg'
 ---
 
 <style>
@@ -198,7 +199,7 @@
 
   <!-- Hero: photo + intro -->
   <div class="hero">
-    <img class="image" src="/src/image/img-selff.jpg" alt="Vishnu Kadam" />
+    <img class="image" src={AboutImage.src} alt="Vishnu Kadam" />
     <div class="intro-text">
       <h1>Vishnu Kadam</h1>
       <span class="tag">BS-MS · IISER Pune</span>
@@ -232,11 +233,9 @@
     <p class="section-label">Interests</p>
     <div class="pills">
       <span class="pill">Mechanistic Interpretability</span>
-      <span class="pill">Deep Learning Theory</span>
+      <span class="pill">Deep Learning </span>
       <span class="pill">Weather Prediction</span>
-      <span class="pill">Diffusion Models</span>
-      <span class="pill">Protein Interaction</span>
-      <span class="pill">Model Architecture</span>
+      <span class="pill">NLP</span>
     </div>
   </div>
 
@@ -244,18 +243,11 @@
 
   <!-- Research -->
   <div class="section">
-    <p class="section-label">Research</p>
-    <h2>Protein–Protein Interaction</h2>
-    <p>
-      My first research project was deep learning for protein–protein interaction
-      under Dr. Arnab Goswami. I handled everything end-to-end — dataset
-      creation, model architecture decisions, training, and benchmarking. It was
-      my first real exposure to what research actually demands, and it led to my
-      first publication.
-    </p>
+    <p class="section-label">Publication</p>
+    
     <div class="pub-card">
-      <p class="pub-title">Your paper title here</p>
-      <p class="pub-venue">Venue · Year · <a href="#" style="color: var(--color-accent); text-decoration:none;">PDF ↗</a></p>
+      <p class="pub-title">CurvePotGCN – A graph neural network to predict protein–protein interactions using surface curvature and electrostatic potential as node-features</p>
+      <p class="pub-venue"> 2026 <a href="https://link.springer.com/article/10.1007/s12039-025-02459-7" style="color: var(--color-accent); text-decoration:none;">PDF ↗</a></p>
     </div>
   </div>
 
@@ -264,13 +256,6 @@
   <!-- Projects -->
   <div class="section">
     <p class="section-label">Projects</p>
-    <h2>Diffusion Models</h2>
-    <p>
-      An in-depth dive into score-based diffusion — I implemented annealed
-      Langevin dynamics from scratch and built extensive visualisations to
-      develop an intuition for the process.
-    </p>
-
     <h2>Weather Prediction · Master's Thesis</h2>
     <p>
       Started as a curriculum project and grew into my thesis. I trained and
@@ -278,6 +263,24 @@
       regional forecasting capabilities after fine-tuning. Currently extending
       this with mechanistic interpretability to understand what the model has
       actually learned.
+    </p>
+    
+
+    
+    <h2>Protein–Protein Interaction</h2>
+    <p>
+      My first research project was deep learning for protein–protein interaction
+      under Dr. Arnab Goswami. I handled everything end-to-end — dataset
+      creation, model architecture decisions, training, and benchmarking. It was
+      my first real exposure to what research actually demands, and it led to my
+      first publication.
+    </p>
+
+    <h2>Diffusion Models</h2>
+    <p>
+      An in-depth dive into score-based diffusion — I implemented annealed
+      Langevin dynamics from scratch and built extensive visualisations to
+      develop an intuition for the process.
     </p>
   </div>
 
