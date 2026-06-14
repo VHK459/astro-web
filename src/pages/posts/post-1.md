@@ -55,6 +55,8 @@ model = SFNO(
 
 I trained two different models one on $5.6$ and another on $1.5$.
 
+#### 5.6
+
 
 
 ### Infodump
