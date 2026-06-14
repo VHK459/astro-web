@@ -4,6 +4,8 @@ import Footer from '../components/Footer.astro';
 const pageTitle = "Kadmium ";
 import ShaderBackground from '../components/ShaderBackground.astro';
 import DotField from '../components/DotField.astro';
+import ProfileImage from 'src/image/image-selff-optm.gif'
+import {Image} from 'astro:assets'
 ---
 <style>
   :global(body) {
@@ -65,7 +67,7 @@ import DotField from '../components/DotField.astro';
   <div class="site-homepage">
     
     <div >
-    <img class="img-self" src="src/image/image-selff-optm.gif" alt="">
+    <Image class="img-self" src={ProfileImage} alt="">
     <p class="img-wrapper">Vishnu Kadam</p>
     </div>
     <ShaderBackground />
