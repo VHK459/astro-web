@@ -1,6 +1,26 @@
-
+/* 
 body{
     background-color: rgb(0, 0, 0);
+} */
+
+/* KaTeX dark theme overrides */
+.katex {
+  color: rgba(220, 215, 235, 0.9);
+  font-size: 1.05em;
+}
+
+/* Display blocks — add breathing room */
+.katex-display {
+  margin: 2rem 0;
+  overflow-x: auto;        /* scroll on mobile if equation is wide */
+  padding: 1.25rem 1.5rem;
+  background: rgba(10, 6, 20, 0.6);
+  border: 1px solid rgba(140, 80, 255, 0.15);
+  border-radius: 8px;
+}
+
+.katex-display > .katex {
+  color: rgba(210, 190, 255, 0.92);
 }
 
 .site-wrapper{

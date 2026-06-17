@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 
-title: 'My First Blog Post'
+title: "'Master's Thesis"
 pubDate: 2022-07-01
 description: 'This is the first post of my new Astro blog.'
 author: 'Vishnu'
@@ -51,13 +51,36 @@ model = SFNO(
 | `scale_factor` | 2 | Channel expansion inside each layer's MLP block |
 | `hard_thresholding_fraction` | 1.0 | Fraction of spherical harmonic modes retained (1 = all) |
 
-### Training dynamics
+### Training Details
 
-I trained two different models one on $5.6$ and another on $1.5$.
+Two models were trained one with 5.6 degree resolution and another with 1.5 degree.
+
+Different loss functions were tested to check the effects of various loss terms used in the graphcast and forecastnet paper, and finally based on the results a final loss function was used for 1.5 degree model training. 
+
+The idea was to quickly train 5.6 model, infer the training dynamics and hyperparameter ranges and then use them as a starting point for the final 1.4 degree model train run.
+
+
 
 #### 5.6
 
+Add the train test dev table of dates,
+Add the loss functions tested along with the results
 
+MSE Loss
+The MSE Loss lead to the 
+
+After each loss function explain what is happening 
+Add the list of variables used in training
+
+#### 1.4
+Explain the problems faced
+Explain the dataloader part
+
+$\degree$
 
 ### Infodump
+
+Here, explain the zarr format and why efficient dataloading is important
+
+Explain another motivation for doing this project.
 

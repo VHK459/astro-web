@@ -3,9 +3,9 @@
 
 /* --- Dark Theme Tokens --- */
 :root {
-  --color-bg: #000000;           /* Deep midnight charcoal */
-  --color-text: #8d8d8d;         /* Off-white for high contrast without glare */
-  --color-text-muted: #636370;   /* Soft gray for subtext */
+  --color-bg: radial-gradient(circle at 50% 0%, #1a1a24 0%, #000000 80%);           /* Deep midnight charcoal */
+  --color-text: #ffffff;         /* Off-white for high contrast without glare */
+  --color-text-muted: #858596;   /* Soft gray for subtext */
   --color-accent: #46A695;       /* Slightly brighter teal for accessibility on dark backgrounds */
   --color-accent-warm: #D9855F;  /* Slightly brighter terracotta */
   --color-surface: #1E1E2A;      /* Elevated surface color for cards/nav drops */
@@ -14,7 +14,7 @@
 
 /* --- Global Elements applying the theme --- */
 body {
-  background-color: var(--color-bg);
+  background: var(--color-bg);
   color: var(--color-text);
   transition: background-color 0.3s ease, color 0.3s ease;
   margin: 0;
