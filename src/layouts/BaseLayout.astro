@@ -8,6 +8,12 @@ const  { pageTitle } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <script is:inline>
+  // Runs before page renders — prevents flash of wrong theme
+  const stored = localStorage.getItem('theme');
+  const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', stored || system);
+</script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link
   rel="stylesheet"

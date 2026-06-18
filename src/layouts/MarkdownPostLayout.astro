@@ -200,9 +200,21 @@ import "../styles/markdown.css"
 
   /* ── Mobile ── */
   @media (max-width: 600px) {
+
     .post-banner { height: 200px; }
+
+    
     .post-header,
     .post-body,
     .post-footer { padding-inline: 1.25rem; }
+
+    :global(table) {
+      font-size: .5rem;
+    }
+
+    :global(.page-padding){
+    padding-inline: .6rem;
+    overflow:visible;
+  }
   }
 </style>
