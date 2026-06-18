@@ -2,188 +2,151 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
 const pageTitle = "";
-// import * from THREE as 'three';
-// import DotField from '../components/DotField';
-
 ---
 
 <BaseLayout pageTitle={pageTitle}>
-  <div class="al-folio-container">
-    <!-- <header class="page-header"> -->
-      <h1 class="page-title">{"Blog"}</h1>
-      <!-- <p class="page-description">This is where I will post about my journey learning Astro.</p> -->
-    <!-- </header> -->
+  <div class="blog-shell">
 
-    <div class="card-grid">
+    <div class="blog-head">
+      <p class="eyebrow">Writing</p>
+      <h1>Blog</h1>
+    </div>
+
+    <div class="post-grid">
       {allPosts.map((post: any) => (
-        <article class="card">
-          <a href={post.url} class="card-link-wrapper">
-            <div class="card-img-container">
-              <img 
-                src={post.frontmatter.image || 'https://via.placeholder.com/800x500?text=Blog+Post'} 
-                alt={post.frontmatter.title} 
-                class="card-img-top"
-              />
-            </div>
-            
-            <div class="card-body">
-              <h2 class="card-title">{post.frontmatter.title}</h2>
-              
-              {/* Al-folio heavily features dates in small muted text */}
-              {post.frontmatter.date && (
-                <p class="card-text text-muted">
-                  <small>{new Date(post.frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</small>
-                </p>
-              )}
-              
-              {post.frontmatter.description && (
-                <p class="card-text">{post.frontmatter.description}</p>
-              )}
-            </div>
-          </a>
-        </article>
+        <a href={post.url} class="post-card">
+          <div class="post-img">
+            <img
+              src={post.frontmatter.image || 'https://via.placeholder.com/800x500?text=Blog+Post'}
+              alt={post.frontmatter.title}
+            />
+          </div>
+          <div class="post-body">
+            {post.frontmatter.date && (
+              <p class="post-date">
+                {new Date(post.frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </p>
+            )}
+            <h2 class="post-title">{post.frontmatter.title}</h2>
+            {post.frontmatter.description && (
+              <p class="post-desc">{post.frontmatter.description}</p>
+            )}
+          </div>
+        </a>
       ))}
     </div>
+
   </div>
 </BaseLayout>
 
 <style>
-  /* Base Al-Folio Typography & Spacing */
-  .al-folio-container {
-    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", Arial, sans-serif;
-    color: #212529; /* Bootstrap standard text color */
-    max-width: 1000px; /* Al-folio usually has a constrained max-width */
+  .blog-shell {
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 2rem 0 4rem;
   }
 
-  .page-header {
-    margin-bottom: 2.5rem;
-    border-bottom: 1px solid #dee2e6;
-    padding-bottom: 1rem;
+  .blog-head {
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
   }
 
-  .page-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.02em;
+  .eyebrow {
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin: 0 0 0.6rem;
   }
 
-  .page-description {
-    font-size: 1.15rem;
-    color: #f1f8ff;
+  .blog-head h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 500;
+    color: var(--color-ink);
     margin: 0;
+    line-height: 1;
   }
 
-  /* Grid Layout */
-  .card-grid {
+  /* ── Grid: hairline borders via shared background trick ── */
+  .post-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--color-border);
+    border: 1px solid var(--color-border);
   }
 
-  /* Al-Folio / Bootstrap Card Styling */
-  .card {
-    position: relative;
+  .post-card {
     display: flex;
     flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #020202;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: 0.25rem; /* Classic subtle al-folio corners */
-    transition: box-shadow 0.3s ease;
-  }
-
-  /* Subtle academic hover effect */
-  .card:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Clickable wrapper */
-  .card-link-wrapper {
+    background: var(--color-surface);
     text-decoration: none;
     color: inherit;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    transition: background 0.15s ease;
   }
 
-  /* Card Image */
-  .card-img-container {
+  .post-card:hover {
+    background: var(--color-surface-soft);
+  }
+
+  .post-card:hover .post-title {
+    color: var(--color-accent-strong);
+  }
+
+  .post-img {
     width: 100%;
-    height: 180px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    height: 200px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-border);
   }
 
-  .card-img-top {
+  .post-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* Rounds only the top corners to match the card border */
-    border-top-left-radius: calc(0.25rem - 1px);
-    border-top-right-radius: calc(0.25rem - 1px);
+    display: block;
   }
 
-  /* Card Content */
-  .card-body {
-    flex: 1 1 auto;
-    padding: 1.25rem;
+  .post-body {
+    padding: 1.5rem;
   }
 
-  .card-title {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
+  .post-date {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin: 0 0 0.6rem;
+  }
+
+  .post-title {
+    font-family: Georgia, serif;
+    font-size: 1.15rem;
     font-weight: 500;
-    line-height: 1.2;
-    color: #78b4ef;
+    color: var(--color-ink);
+    line-height: 1.35;
+    margin: 0 0 0.5rem;
+    transition: color 0.15s ease;
   }
 
-  .card-link-wrapper:hover .card-title {
-    color: #549763; /* Optional: Al-folio sometimes turns titles blue on hover */
+  .post-desc {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin: 0;
   }
 
-  .card-text {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #ffffff;
-  }
+  @media (max-width: 700px) {
+    .post-grid {
+      grid-template-columns: 1fr;
+    }
 
-  .card-text:last-child {
-    margin-bottom: 0;
-  }
-
-  .text-muted {
-    color: #8fb1cf;
-  }
-  
-  .text-muted small {
-    font-size: 80%;
-    font-weight: 400;
-  }
-
-  /* Card Image Container */
-  .card-img-container {
-    width: 100%;
-    height: 180px;
-    border-bottom: 1px solid rgba(250, 243, 243, 0.125);
-    overflow: hidden; /* <-- This strictly clips any overflowing image parts */
-    position: relative; 
-    
-    /* Move the border-radius here instead of the image */
-    border-top-left-radius: calc(0.25rem - 1px);
-    border-top-right-radius: calc(0.25rem - 1px);
-  }
-
-  /* Card Image */
-  .card-img-top {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Forces image to fill the box without stretching */
-    display: block; /* Removes the tiny default gap below inline images */
+    .blog-shell {
+      padding: 1.5rem 1rem 3rem;
+    }
   }
 </style>

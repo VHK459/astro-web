@@ -1,7 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AboutGrid from '../components/AboutGrid.astro';
-import AsciiBackground from '../image/ascii-magic-2.png'
+import AsciiBackground from '../image/ascii-magic-3.png'
+
+import { getImage } from 'astro:assets';
+
+const asciiBackground = await getImage({src: AsciiBackground})
 const pageTitle = "";
 ---
 <style>
@@ -42,14 +46,14 @@ const pageTitle = "";
         position:relative;
         min-height:100vh;
         overflow: hidden;
-        /* background-image: var(--ascii-bg); */    
+        /* background-image:  */    
     }
 
  .ascii-bg-layer{
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url('/images/ascii-magic-3.png');
+    background-image:var(--bimg);;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -82,7 +86,7 @@ const pageTitle = "";
 
 <BaseLayout pageTitle={pageTitle}>
     <div class="home-shell" >
-        <div class="ascii-bg-layer"></div>
+        <div class="ascii-bg-layer"  style={ `background-image: url("${asciiBackground.src}")` }></div>
     <div class="hero-container">
     <p class="above">NLP . DLWP . Mech Interp</p>
   <p class="heading">VISHNU KADAM</p>

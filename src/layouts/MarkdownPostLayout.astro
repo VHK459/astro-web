@@ -6,25 +6,203 @@ import "../styles/markdown.css"
 
 <BaseLayout pageTitle={frontmatter.title}>
 
-  <!-- Full-width banner -->
-  <div class="blog-banner">
-    <img src={frontmatter.image} alt={frontmatter.imageAlt ?? frontmatter.title} />
-  </div>
+  <article class="post-shell">
 
-  <!-- Meta block -->
-  <div class="blog-meta">
-   
-    <div class="byline">
-      <span>{frontmatter.author}</span>
-      <span>·</span>
-      <span>{frontmatter.pubDate.toString().slice(0, 10)}</span>
+    <div class="post-banner">
+      <img src={frontmatter.image} alt={frontmatter.imageAlt ?? frontmatter.title} />
     </div>
-    {frontmatter.description && (
-      <p class="description">{frontmatter.description}</p>
-    )}
+
+    <header class="post-header">
+      <div class="byline">
+        <span>{frontmatter.author}</span>
+        <span class="dot">·</span>
+        <time>{frontmatter.pubDate.toString().slice(0, 10)}</time>
+      </div>
+      <h1>{frontmatter.title}</h1>
+      {frontmatter.description && (
+        <p class="post-description">{frontmatter.description}</p>
+      )}
+    </header>
+
+    <div class="post-body">
       <slot />
-  </div>
+    </div>
 
+    <footer class="post-footer">
+      <a href="/blog">← back to all posts</a>
+    </footer>
 
+  </article>
 
 </BaseLayout>
+
+<style>
+  .post-shell {
+    max-width: 760px;
+    margin: 0 auto;
+    border-left: 1px solid var(--color-border);
+    border-right: 1px solid var(--color-border);
+  }
+
+  /* ── Banner ── */
+  .post-banner {
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .post-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  /* ── Header ── */
+  .post-header {
+    padding: 2.5rem 2rem 2rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .byline {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 1rem;
+  }
+
+  .dot {
+    color: var(--color-muted);
+  }
+
+  .post-header h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    font-weight: 500;
+    color: var(--color-ink);
+    line-height: 1.15;
+    margin: 0 0 1rem;
+  }
+
+  .post-description {
+    font-size: 1rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ── Body prose ── */
+  .post-body {
+    padding: 2.5rem 2rem;
+    color: var(--color-text);
+    font-size: 1.02rem;
+    line-height: 1.85;
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+
+  .post-body :global(p) {
+    margin: 0 0 1.5rem;
+  }
+
+  .post-body :global(h2) {
+    font-family: var(--font-sans, system-ui);
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin: 2.25rem 0 0.75rem;
+  }
+
+  .post-body :global(h3) {
+    font-family: var(--font-sans, system-ui);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin: 1.75rem 0 0.6rem;
+  }
+
+  .post-body :global(code) {
+    font-family: 'Courier New', monospace;
+    font-size: 0.88em;
+    background: var(--color-accent-soft);
+    border: 1px solid var(--color-border-strong);
+    border-radius: 3px;
+    padding: 1px 6px;
+    color: var(--color-accent-text);
+  }
+
+  .post-body :global(pre) {
+    background: var(--color-code-bg);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .post-body :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.9rem;
+    color: var(--color-code-ink);
+  }
+
+  .post-body :global(blockquote) {
+    margin: 1.5rem 0;
+    padding: 0.75rem 0 0.75rem 1.5rem;
+    border-left: 2px solid var(--color-accent);
+    color: var(--color-muted);
+    font-style: italic;
+  }
+
+  .post-body :global(a) {
+    color: var(--color-accent-text);
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent-soft);
+  }
+
+  .post-body :global(a:hover) {
+    text-decoration-color: var(--color-accent);
+  }
+
+  .post-body :global(img) {
+    width: 100%;
+    border-radius: 0;
+    margin: 1.5rem 0;
+    border: 1px solid var(--color-border);
+  }
+
+  /* ── Footer ── */
+  .post-footer {
+    padding: 1.5rem 2rem 2.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .post-footer a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .post-footer a:hover {
+    color: var(--color-accent-strong);
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 600px) {
+    .post-banner { height: 200px; }
+    .post-header,
+    .post-body,
+    .post-footer { padding-inline: 1.25rem; }
+  }
+</style>
