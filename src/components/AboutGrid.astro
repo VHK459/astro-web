@@ -1,287 +1,254 @@
 ---
-import AboutImage from '../image/img-selff.jpg'
+import AboutImage from '../image/img-selff.jpg';
 ---
 
-<style>
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    font-size: 1.25rem;
-    padding: 2rem 1.5rem 4rem;
-    color: #0e0101;
-    font-family: system-ui, -apple-system, sans-serif;
-    background-color: rgba(39, 42, 41, 0.704);
-    border-radius: 15px;
-  }
+<div class="grid-shell">
 
-  /* ── Hero row: photo + intro ── */
-  .hero {
-    display: flex;
-    align-items: flex-start;
-    gap: 2rem;
-    margin-bottom: 3rem;
-  }
-
-  .image {
-    width: 140px;
-    height: 140px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
-    border: 2px solid rgba(54, 110, 100, 0.5);
-  }
-
-  .intro-text h1 {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #fff;
-    margin: 0 0 0.4rem;
-  }
-
-  .intro-text .tag {
-    display: inline-block;
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-accent, #46A695);
-    border: 1px solid var(--color-accent, #46A695);
-    border-radius: 4px;
-    padding: 2px 8px;
-    margin-bottom: 0.75rem;
-  }
-
-  .intro-text p {
-    font-size: 1.23rem;
-    /* line-height: 2rem; */
-    color: var(--color-text-muted, #ffffff);
-    margin: 0;
-  }
-
-  /* ── Divider ── */
-  .divider {
-    border: none;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    margin: 2rem 0;
-  }
-
-  /* ── Section blocks ── */
-  .section {
-    margin-bottom: 2.5rem;
-  }
-
-  .section-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--color-accent, #46A695);
-    margin: 0 0 0.75rem;
-  }
-
-  .section h2 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #fff;
-    margin: 0 0 0.6rem;
-  }
-
-  .section p {
-    /* font-size: 0.95rem; */
-    /* line-height: 1.75; */
-    color: var(--color-text-muted, #636370);
-    margin: 0 0 0.9rem;
-  }
-
-  /* ── Interests pill row ── */
-  .pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-  }
-
-  .pill {
-    font-size: 0.78rem;
-    padding: 4px 12px;
-    border-radius: 999px;
-    background: rgba(70, 166, 149, 0.1);
-    border: 1px solid rgba(70, 166, 149, 0.3);
-    color: var(--color-accent, #46A695);
-    letter-spacing: 0.04em;
-  }
-
-  /* ── Publication card ── */
-  .pub-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 10px;
-    padding: 1rem 1.2rem;
-    margin-top: 0.75rem;
-  }
-
-  .pub-card .pub-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #fff;
-    margin: 0 0 0.3rem;
-  }
-
-  .pub-card .pub-venue {
-    font-size: 1rem;
-    color: var(--color-text-muted, #636370);
-    margin: 0;
-  }
-
-  /* ── Currently banner ── */
-  .now-banner {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: rgba(70, 166, 149, 0.07);
-    border: 1px solid rgba(70, 166, 149, 0.2);
-    border-radius: 10px;
-    padding: 0.9rem 1.2rem;
-    margin-top: 0.75rem;
-  }
-
-  .now-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--color-accent, #46A695);
-    flex-shrink: 0;
-    box-shadow: 0 0 6px var(--color-accent, #46A695);
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.3; }
-  }
-
-  .now-banner p {
-    font-size: 0.9rem;
-    color: #c0c0c0;
-    margin: 0;
-    line-height: 1.5;
-  }
-
-  /* ── MOBILE ── */
-  @media (max-width: 600px) {
-    .container {
-      padding: 1.25rem 1rem 3rem;
-    }
-
-    /* Stack photo above text on mobile */
-    .hero {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 1.25rem;
-    }
-
-    .image {
-      width: 110px;
-      height: 110px;
-    }
-
-    .intro-text h1 {
-      font-size: 1.35rem;
-    }
-
-    .pills {
-      justify-content: center;
-    }
-  }
-</style>
-
-<div class="container">
-
-  <!-- Hero: photo + intro -->
-  <div class="hero">
-    <img class="image" src={AboutImage.src} alt="Vishnu Kadam" />
-    <div class="intro-text">
-      <h1>Vishnu Kadam</h1>
-      <span class="tag">BS-MS · IISER Pune</span>
-      <p>
-        I'm a BS-MS graduate from the Indian Institute of Science Education and
-        Research, Pune. My interests lie in all things deep learning — from
-        theory to the latest applications. Recently I've been drawn to
-        Mechanistic Interpretability and am working my way through it seriously.
+  <div class="row row--hero">
+    <div class="cell cell--intro">
+      <p class="eyebrow">NLP / DLWP / Mech Interp</p>
+      <h1>Vishnu<br />Kadam</h1>
+      <p class="lede">
+        BS-MS graduate, IISER Pune. Deep learning from theory to
+        application — now going deep on mechanistic interpretability.
       </p>
     </div>
+    <div class="cell cell--portrait">
+      <img src={AboutImage.src} alt="Vishnu Kadam" />
+    </div>
   </div>
 
-  <!-- <hr class="divider" /> -->
-
-  <!-- Current focus -->
-  <div class="section">
-    <p class="section-label">Now</p>
-    <div class="now-banner">
-      <div class="now-dot"></div>
+  <div class="row row--split">
+    <div class="cell cell--now">
+      <p class="label">Now</p>
       <p>
-        Investigating mechanistic interpretability techniques on AI weather
-        models — trying to uncover what these models actually learn internally.
+        Investigating mechanistic interpretability techniques on AI
+        weather models — uncovering what these models actually learn
+        internally.
       </p>
     </div>
-  </div>
-
-  <hr class="divider" />
-
-  <!-- Interests -->
-  <div class="section">
-    <p class="section-label">Interests</p>
-    <div class="pills">
-      <span class="pill">Mechanistic Interpretability</span>
-      <span class="pill">Deep Learning </span>
-      <span class="pill">Weather Prediction</span>
-      <span class="pill">NLP</span>
+    <div class="cell cell--stack">
+      <p class="label">Stack</p>
+      <div class="tags">
+        <span>Mech Interp</span>
+        <span>DL</span>
+        <span>NLP</span>
+        <span>Weather</span>
+      </div>
     </div>
   </div>
 
-  <hr class="divider" />
-
-  <!-- Research -->
-  <div class="section">
-    <p class="section-label">Publication</p>
-    
-    <div class="pub-card">
-      <p class="pub-title">CurvePotGCN – A graph neural network to predict protein–protein interactions using surface curvature and electrostatic potential as node-features</p>
-      <p class="pub-venue"> 2026 <a href="https://link.springer.com/article/10.1007/s12039-025-02459-7" style="color: var(--color-accent); text-decoration:none;">PDF ↗</a></p>
+  <div class="row">
+    <div class="cell cell--pub">
+      <p class="label">Publication / 2026</p>
+      <p class="pub-title">
+        CurvePotGCN — predicting protein–protein interactions using
+        surface curvature and electrostatic potential as node features
+      </p>
+      <a href="https://link.springer.com/article/10.1007/s12039-025-02459-7">
+        read paper →
+      </a>
     </div>
   </div>
 
-  <hr class="divider" />
-
-  <!-- Projects -->
-  <div class="section">
-    <p class="section-label">Projects</p>
-    <h2>Weather Prediction · Master's Thesis</h2>
-    <p>
-      Started as a curriculum project and grew into my thesis. I trained and
-      fine-tuned an SFNO-based weather prediction model, then benchmarked its
-      regional forecasting capabilities after fine-tuning. Currently extending
-      this with mechanistic interpretability to understand what the model has
-      actually learned.
-    </p>
-    
-
-    
-    <h2>Protein–Protein Interaction</h2>
-    <p>
-      My first research project was deep learning for protein–protein interaction
-      under Dr. Arnab Goswami. I handled everything end-to-end — dataset
-      creation, model architecture decisions, training, and benchmarking. It was
-      my first real exposure to what research actually demands, and it led to my
-      first publication.
-    </p>
-
-    <h2>Diffusion Models</h2>
-    <p>
-      An in-depth dive into score-based diffusion — I implemented annealed
-      Langevin dynamics from scratch and built extensive visualisations to
-      develop an intuition for the process.
-    </p>
+  <div class="row row--projects">
+    <div class="cell">
+      <p class="label">01 / Thesis</p>
+      <h3>Weather prediction</h3>
+      <p>
+        SFNO-based model, fine-tuned and benchmarked for regional
+        forecasting. Now extending with mechanistic interpretability.
+      </p>
+    </div>
+    <div class="cell">
+      <p class="label">02 / Research</p>
+      <h3>Protein interaction</h3>
+      <p>
+        End-to-end GNN pipeline — dataset creation, architecture,
+        training, benchmarking. My first publication.
+      </p>
+    </div>
+    <div class="cell">
+      <p class="label">03 / Project</p>
+      <h3>Diffusion models</h3>
+      <p>
+        Annealed Langevin dynamics, implemented from scratch with
+        extensive visualisations.
+      </p>
+    </div>
   </div>
 
 </div>
+
+<style>
+  .grid-shell {
+    border: 1px solid var(--color-border);
+  }
+
+  .row {
+    display: grid;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .row:last-child {
+    border-bottom: none;
+  }
+
+  .cell {
+    padding: 2rem;
+    border-right: 1px solid var(--color-border);
+  }
+
+  .cell:last-child {
+    border-right: none;
+  }
+
+  /* ── Hero row ── */
+  .row--hero {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .cell--intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   
+  }
+
+  .eyebrow {
+    font-family: 'Courier New', monospace;
+    font-size: .72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin: 0 0 1rem;
+  }
+
+  .cell--intro h1 {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(2.2rem, 5vw, 3.2rem);
+    font-weight: 500;
+    line-height: 1;
+    color: var(--color-ink);
+    margin: 0 0 1.25rem;
+  }
+
+  .lede {
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: var(--color-muted);
+    margin: 0;
+    max-width: 42ch;
+  }
+
+  /* ── Portrait cell — strictly contained ── */
+  .cell--portrait {
+    padding: 0;
+    min-height: 320px;
+    overflow: hidden;
+    background: var(--color-surface-soft);
+  }
+
+  .cell--portrait img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+  }
+
+  /* ── Now / Stack row ── */
+  .row--split {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .label {
+    /* font-family: 'Courier New', monospace; */
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin: 0 0 0.75rem;
+  }
+
+  .cell--now p:last-child,
+  .cell--pub p,
+  .cell--projects p {
+    font-size: 0.9rem;
+    line-height: 1.65;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .tags span {
+    font-family: 'Courier New', monospace;
+    font-size: 0.7rem;
+    padding: 3px 9px;
+    border: 1px solid var(--color-border-strong);
+    /* color: var(--color-muted); */
+  }
+
+  /* ── Publication row ── */
+  .cell--pub {
+    /* background: var(--color-surface); */
+  }
+
+  .pub-title {
+    font-family: Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.45;
+    color: var(--color-ink);
+    margin: 0 0 0.6rem;
+    max-width: 65ch;
+  }
+
+  .cell--pub a {
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  /* ── Projects row ── */
+  .row--projects {
+    grid-template-columns: repeat(3, 1fr);
+     background: var(--color-surface);
+  }
+
+  .row--projects h3 {
+    font-family: Georgia, serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin: 0 0 0.75rem;
+    background-color: blur(4px);
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    .row--hero,
+    .row--split,
+    .row--projects {
+      grid-template-columns: 1fr;
+    }
+
+    .cell {
+      border-right: none;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .cell:last-child {
+      border-bottom: none;
+    }
+
+    .cell--portrait {
+      min-height: 240px;
+    }
+  }
+</style>

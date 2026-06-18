@@ -1,141 +1,120 @@
-/* --- Color Tokens (Light Theme by Default) --- */
+@import "defaults.css";
 
-
-/* --- Dark Theme Tokens --- */
-:root {
-  --color-bg: radial-gradient(circle at 50% 0%, #1a1a24 0%, #000000 80%);           /* Deep midnight charcoal */
-  --color-text: #ffffff;         /* Off-white for high contrast without glare */
-  --color-text-muted: #858596;   /* Soft gray for subtext */
-  --color-accent: #46A695;       /* Slightly brighter teal for accessibility on dark backgrounds */
-  --color-accent-warm: #D9855F;  /* Slightly brighter terracotta */
-  --color-surface: #1E1E2A;      /* Elevated surface color for cards/nav drops */
-  --color-border: rgba(244, 244, 246, 0.1);
+html {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    background: var(--color-bg);
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* --- Global Elements applying the theme --- */
 body {
-  background: var(--color-bg);
-  color: var(--color-text);
-  transition: background-color 0.3s ease, color 0.3s ease;
   margin: 0;
-  font-family: system-ui, -apple-system, sans-serif;
-  display: flex;
-  flex-direction: column;
+    min-width: 20rem;
+    min-height: 100vh;
+    background: linear-gradient(90deg, transparent calc(100% - 1px), var(--color-grid-line) 1px), linear-gradient(180deg, transparent calc(100% - 1px), var(--color-grid-line) 1px), radial-gradient(circle, var(--color-grid-dot) 1px, transparent 1.5px), var(--color-bg);
+    background-size: 12rem 12rem, 12rem 12rem, 1rem 1rem, auto;
 }
 
-/* .site-wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-} */
-
-main {
-  flex: 1;
-
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-accent) transparent;
 }
 
-/* --- Navigation Styles --- */
-
-/* Mobile Toggle Button */
-.menu {
-  background-color: transparent;
-  border: 2px solid var(--color-accent);
-  color: var(--color-accent);
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  display: flex; 
-  
+.page-padding{
+    --page-padding: 2.75rem;
+    position: relative;
+    min-height: 100vh;
+    padding-inline: var(--page-padding);
+    overflow: clip;
+    
 }
 
-.menu:hover {
-  background-color: var(--color-accent);
-  color: var(--color-bg);
+  .page-padding:before{
+    left: 0;
+}
+  .page-padding:after{
+    right:0;
+  }
+  .page-padding:before, .page-padding:after {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: var(--page-padding);
+    content: "";
+    border-inline: 1px solid var(--color-border);
+    background: repeating-linear-gradient(135deg, transparent 0 .5rem, var(--color-hatch-glass) .5rem .75rem), var(--color-inset-highlight);
 }
 
-/* Theme Toggle Button Style */
-.theme-toggle-btn {
-  background: transparent;
-  border: 1px solid var(--color-border);
-  color: var(--color-text);
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-.theme-toggle-btn:hover {
-  background-color: var(--color-surface);
+  *:before, *:after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
+@media (max-width: 600px){
+  /* .page-padding{
+    --page-padding: 1rem;
+  } */
+  .page-padding:after, .page-padding:before{
+    background: none;
+    border-inline: none;
+  }
+}
+
+/* HEADER  */
+
+.site-header-container {
+    position: sticky;
+    top: 0;
+    z-index: 80;
+    margin-inline: calc(var(--page-padding, 0rem) * -1);
+    padding-inline: var(--page-padding, 0rem);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-header-bg);
+    backdrop-filter: blur(1.25rem);
+}
+
+
+.site-header {
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+    align-items: center;
+    max-width: var(--site-width);
+    margin: auto;
+    min-height: 4rem;
+    color: var(--color-muted);
+}
+
+/* Nav */
 .nav-links {
     display: flex;
-    padding: 1%;
-    justify-content: flex-start;
+    align-items: stretch;
+    gap: 2rem;
+    font-size: 2rem;
+    color: var(--color-muted);
+    height: 100%;
     align-items: center;
-    background: none;
-    margin-top: 0;
-    font-size: 1.25rem;
-    width: auto;
-  }
-/* N
-/* Navigation Links */
-.nav-links a {
-  display: block;
-  text-align: center;
-  padding: 14px 0;
- 
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--color-text);
-  transition: all 0.2s ease;
+   a{
+     text-decoration: None;
+     color: var(--color-muted);
+     
+   }
 }
 
-/* Hover & Focus States using your Terracotta accent */
-.nav-links a:hover,
-.nav-links a:focus {
-  background-color: var(--color-accent-warm);
-  color: #ffffff;
-  outline: none;
+.nav-links >:first-child{
+  flex-grow: 1;
+  font-size: 3rem;
+}
+.toggle{
+  text-align: right;
+  padding-right: 10px;
 }
 
-/* Active State Trigger */
-:has(.menu[aria-expanded="true"]) .nav-links {
-  display: block;
-} 
-
-/* --- Desktop Layout Overrides --- */
-  
-
-  .nav-links > *:first-child {
-    margin-left: 0;
-    flex: 30%; 
-    text-align: left;
-    font-size: 1.5rem;
-    font-weight: 400;
+@media (max-width: 600px){
+  .nav-links{
+    font-size: 1rem;
   }
-
-  .nav-links a {
-    display: inline-block;
-     text-decoration: none;
-    padding: 10px 20px;
-    margin-left: 10px;
-    border-radius: 4px;
-    color: var(--color-text-muted);
-  }
-
-  .nav-links a:hover,
-  .nav-links a:focus {
-    background-color: rgba(45, 125, 111, 0.15); /* Tint adjustments work beautifully on both themes */
-    color: var(--color-accent);
-  }
-
-  .menu {
-    display: none;
-  }
+}

@@ -1,75 +1,92 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Footer from '../components/Footer.astro';
-const pageTitle = "Kadmium ";
-import ShaderBackground from '../components/ShaderBackground.astro';
-import DotField from '../components/DotField.astro';
-import ProfileImage from '../image/image-selff-optm.gif'
-
+import AboutGrid from '../components/AboutGrid.astro';
+import AsciiBackground from '../image/ascii-magic-2.png'
+const pageTitle = "";
 ---
 <style>
-  :global(body) {
-    margin: 0;
-    
-  }
-  .site-homepage{
-    /* position: fixed; */
-    /* inset: 12px; */
-    height: 90vh;
-    margin: 3%;
-    border:  2px solid rgba(255, 255, 255, 0.841);
-        border-radius: 35px;
-    overflow: hidden; 
-    z-index: 0;
-  }
-  footer {
-    display: flex;
-    position:absolute;
-    bottom: 0;
-    width: 100%;
-    gap: 1rem;
-    margin-top: 2rem;
-    justify-content: center;
-    background: transparent;
-  }
 
-  .img-self{
-    border-radius: 50%;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    max-width: 40%;
-    max-height: 40%;
-    height: auto;
-    width: auto;
-
-  }
-
-  .img-wrapper{
-    position:absolute;
-    top: 58%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10;
-    height: auto;
-    width: auto;
-    font-size:1.5rem;
+   
+    .above, .below{
+        font-family: 'Courier New', Courier, monospace;
+            /* font-family: "IBMPlexSansTC", "IBM Plex Sans Chinese TC", sans-serif; */
+    font-size: .75rem;
     font-weight: 800;
-    color: rgb(225, 124, 243);
+    letter-spacing: .09em;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    }
+    .heading{
+        font-size: max(3rem, 10vw);
+        margin: 0 0 0 0;
+         font-family:"IBMPlexSansTC", "IBM Plex Sans Chinese TC", sans-serif
+ ;
+        font-weight: 700;
+        line-height: 1;
+    letter-spacing: -.05em;
+    color: var(--color-ink);
+    }
+    .hero-container{
+       
+        max-width: 60vw;
+        position: relative;
+        /* font-size: 5rem; */
+        font-weight: 700;
+        color: var(--color-muted);
+        top: 10%;
+        left: 1rem;
+        padding-top: 6rem;
+        z-index: 12;
+    }
+    .home-shell{
+        position:relative;
+        min-height:100vh;
+        overflow: hidden;
+        /* background-image: var(--ascii-bg); */    
+    }
+
+ .ascii-bg-layer{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/ascii-magic-3.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    
+
+    /* transforms — zoom + pan */
+    transform: scale(1.29) translate(10%, -1%);
+    transform-origin: center;
+
+    /* visual filters */
+    filter: blur(1px) contrast(1.2) brightness(0.9) saturate(0.8);
+
+    opacity: 0.65;
+    pointer-events: none;
+    z-index: 1;
   }
+
+  /* @keyframes slow-zoom {
+  from { transform: scale(1.1) translate(0%, 0%); }
+  to   { transform: scale(1.25) translate(-2%, 2%); }
+} */
+
+/* .ascii-bg-layer {
+  animation: slow-zoom 20s ease-in-out infinite alternate;
+} */
+
+
 </style>
 
 
-
-<BaseLayout pageTitle = {""}>
-  <div class="site-homepage">
-    
-    <div >
-    <img class="img-self" src={ProfileImage.src} alt="">
-    <p class="img-wrapper">Vishnu Kadam</p>
-    </div>
-    <ShaderBackground />
+<BaseLayout pageTitle={pageTitle}>
+    <div class="home-shell" >
+        <div class="ascii-bg-layer"></div>
+    <div class="hero-container">
+    <p class="above">NLP . DLWP . Mech Interp</p>
+  <p class="heading">VISHNU KADAM</p>
+  <p class="below">BS-MS graduate, IISER Pune. Working on problems in NLP and Deep Learning for Weather</p>
   </div>
-</BaseLayout> 
+  </div>
+</BaseLayout>
