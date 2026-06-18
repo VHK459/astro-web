@@ -1,4 +1,4 @@
-@import "defaults.css";
+@import "./defaults.css";
 
 html {
     font-family: var(--font-sans);
