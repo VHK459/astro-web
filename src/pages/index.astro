@@ -1,14 +1,29 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-import AsciiBackground from '/src/image/ascii-magic-3.png'
+import AsciiBackground from '../image/asb.png'
 
 import { getImage } from 'astro:assets';
 
-const asciiBackground = await getImage({src: AsciiBackground})
+const asci = await getImage({src: AsciiBackground})
 const pageTitle = "";
+
 ---
-<style>
+
+
+
+<BaseLayout pageTitle={pageTitle}>
+    <div class="home-shell" >
+        <div class="ascii-bg-layer" > </div>
+    <div class="hero-container">
+    <p class="above">NLP . DLWP . Mech Interp</p>
+  <p class="heading">VISHNU KADAM</p>
+  <p class="below">BS-MS graduate, IISER Pune. Working on problems in NLP and Deep Learning for Weather</p>
+  </div>
+  </div>
+</BaseLayout>
+
+<style >
 
    
     .above, .below{
@@ -53,7 +68,7 @@ const pageTitle = "";
     content: "";
     position: absolute;
     inset: 0;
-    background-image:var(--bimg);;
+    background-image:url(./asb.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -71,26 +86,7 @@ const pageTitle = "";
     z-index: 1;
   }
 
-  /* @keyframes slow-zoom {
-  from { transform: scale(1.1) translate(0%, 0%); }
-  to   { transform: scale(1.25) translate(-2%, 2%); }
-} */
 
-/* .ascii-bg-layer {
-  animation: slow-zoom 20s ease-in-out infinite alternate;
-} */
 
 
 </style>
-
-
-<BaseLayout pageTitle={pageTitle}>
-    <div class="home-shell" >
-        <div class="ascii-bg-layer"  style={ `background-image: url("${asciiBackground.src}")` }></div>
-    <div class="hero-container">
-    <p class="above">NLP . DLWP . Mech Interp</p>
-  <p class="heading">VISHNU KADAM</p>
-  <p class="below">BS-MS graduate, IISER Pune. Working on problems in NLP and Deep Learning for Weather</p>
-  </div>
-  </div>
-</BaseLayout>
